@@ -1,0 +1,2354 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Elegant personal portfolio website for a recent Fine Arts graduate." />
+  <title>[Graduate Name] | Fine Arts Graduate Portfolio</title>
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    /* =========================================================
+       FINE ARTS GRADUATE PORTFOLIO
+       Single-file website: HTML + CSS + JavaScript
+       Replace bracketed placeholders like [Graduate Name]
+       ========================================================= */
+
+    :root {
+      --bg: #f8f4ee;
+      --surface: rgba(255, 255, 255, 0.74);
+      --surface-solid: #ffffff;
+      --text: #141414;
+      --muted: #6f6a64;
+      --line: rgba(20, 20, 20, 0.10);
+      --dark: #0f172a;
+      --navy: #111827;
+      --gold: #c8a96a;
+      --beige: #e9dccb;
+      --sage: #9caa9a;
+      --rose: #d7aaa2;
+      --ink: #1b1b1b;
+      --shadow: 0 24px 70px rgba(21, 17, 12, 0.13);
+      --shadow-soft: 0 12px 35px rgba(21, 17, 12, 0.09);
+      --radius-xl: 34px;
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --max: 1180px;
+      --serif: "Cormorant Garamond", Georgia, serif;
+      --sans: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body.dark {
+      --bg: #0b0d12;
+      --surface: rgba(18, 21, 30, 0.78);
+      --surface-solid: #121620;
+      --text: #f6f2ea;
+      --muted: #b9b0a5;
+      --line: rgba(255, 255, 255, 0.12);
+      --dark: #f7efe2;
+      --navy: #f9f1e6;
+      --beige: #1d2330;
+      --shadow: 0 24px 70px rgba(0, 0, 0, 0.38);
+      --shadow-soft: 0 12px 35px rgba(0, 0, 0, 0.25);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top left, rgba(200, 169, 106, 0.20), transparent 34%),
+        radial-gradient(circle at 80% 20%, rgba(156, 170, 154, 0.16), transparent 28%),
+        linear-gradient(135deg, var(--bg), #fffaf2 48%, var(--bg));
+      color: var(--text);
+      font-family: var(--sans);
+      overflow-x: hidden;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    body.dark {
+      background:
+        radial-gradient(circle at top left, rgba(200, 169, 106, 0.12), transparent 34%),
+        radial-gradient(circle at 80% 20%, rgba(50, 72, 120, 0.20), transparent 28%),
+        linear-gradient(135deg, #0b0d12, #111827 48%, #090b10);
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button, input, textarea, select {
+      font: inherit;
+    }
+
+    ::selection {
+      background: var(--gold);
+      color: #111;
+    }
+
+    .page-texture {
+      pointer-events: none;
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      opacity: 0.38;
+      background-image:
+        linear-gradient(90deg, rgba(140, 110, 70, 0.05) 1px, transparent 1px),
+        linear-gradient(rgba(140, 110, 70, 0.045) 1px, transparent 1px);
+      background-size: 34px 34px;
+      mask-image: radial-gradient(circle at 50% 20%, black, transparent 78%);
+    }
+
+    .container {
+      width: min(var(--max), calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .section {
+      padding: 96px 0;
+      position: relative;
+    }
+
+    .section-tight {
+      padding: 72px 0;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--gold);
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 34px;
+      height: 1px;
+      background: var(--gold);
+      display: inline-block;
+    }
+
+    h1, h2, h3 {
+      color: var(--text);
+      line-height: 1;
+    }
+
+    h1, h2 {
+      font-family: var(--serif);
+      letter-spacing: -0.035em;
+    }
+
+    h1 {
+      font-size: clamp(3.2rem, 9vw, 7.8rem);
+      font-weight: 700;
+      margin: 14px 0 22px;
+    }
+
+    h2 {
+      font-size: clamp(2.5rem, 5vw, 4.8rem);
+      margin-bottom: 18px;
+    }
+
+    h3 {
+      font-size: 1.15rem;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: var(--muted);
+      line-height: 1.78;
+      font-size: 0.98rem;
+    }
+
+    .lead {
+      max-width: 710px;
+      font-size: clamp(1rem, 1.7vw, 1.2rem);
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 28px;
+      align-items: end;
+      margin-bottom: 40px;
+    }
+
+    .section-head p {
+      max-width: 520px;
+    }
+
+    .gold {
+      color: var(--gold);
+    }
+
+    .glass {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    /* ========================= NAVBAR ========================= */
+
+    .nav {
+      position: fixed;
+      top: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(var(--max), calc(100% - 32px));
+      z-index: 1000;
+      border-radius: 999px;
+      padding: 10px 12px 10px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: 0.3s ease;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: #111;
+      background:
+        radial-gradient(circle at 30% 30%, #fff5db, transparent 30%),
+        linear-gradient(135deg, var(--gold), #ead9ad);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.55);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-size: 0.86rem;
+      font-weight: 700;
+      padding: 11px 13px;
+      border-radius: 999px;
+      transition: 0.25s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+      background: rgba(200, 169, 106, 0.11);
+    }
+
+    .nav-actions {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .icon-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      background: var(--surface-solid);
+      color: var(--text);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      transition: 0.25s ease;
+    }
+
+    .icon-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-soft);
+      border-color: rgba(200, 169, 106, 0.5);
+    }
+
+    .menu-btn {
+      display: none;
+    }
+
+    /* ========================= BUTTONS ========================= */
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+      margin-top: 28px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      padding: 14px 22px;
+      font-weight: 800;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: 0.28s ease;
+      min-height: 50px;
+    }
+
+    .btn-primary {
+      color: #101010;
+      background: linear-gradient(135deg, var(--gold), #efd8a0);
+      box-shadow: 0 18px 35px rgba(200, 169, 106, 0.26);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 22px 45px rgba(200, 169, 106, 0.34);
+    }
+
+    .btn-ghost {
+      color: var(--text);
+      background: var(--surface);
+      border-color: var(--line);
+    }
+
+    .btn-ghost:hover {
+      transform: translateY(-3px);
+      border-color: rgba(200, 169, 106, 0.48);
+      box-shadow: var(--shadow-soft);
+    }
+
+    /* ========================= HERO ========================= */
+
+    .hero {
+      min-height: 100vh;
+      padding: 150px 0 88px;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 680px;
+      height: 680px;
+      right: -230px;
+      top: 10%;
+      background:
+        linear-gradient(135deg, transparent 44%, rgba(200, 169, 106, 0.38) 45%, transparent 46%),
+        radial-gradient(circle, rgba(200, 169, 106, 0.22), transparent 62%);
+      border-radius: 50%;
+      filter: blur(1px);
+      opacity: 0.78;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 54px;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-kicker {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 13px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.44);
+      color: var(--muted);
+      font-size: 0.8rem;
+      font-weight: 800;
+    }
+
+    body.dark .pill {
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .hero-title-note {
+      color: var(--gold);
+      font-family: var(--serif);
+      font-size: clamp(1.4rem, 3vw, 2.2rem);
+      font-style: italic;
+      line-height: 1.2;
+      margin-top: -12px;
+      margin-bottom: 18px;
+    }
+
+    .hero-meta {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 32px;
+      max-width: 650px;
+    }
+
+    .meta-card {
+      padding: 18px;
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.48);
+    }
+
+    body.dark .meta-card {
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .meta-card strong {
+      display: block;
+      font-size: 1rem;
+      margin-bottom: 5px;
+    }
+
+    .meta-card span {
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .portrait-wrap {
+      position: relative;
+      min-height: 620px;
+    }
+
+    .portrait-card {
+      position: absolute;
+      inset: 0 0 0 auto;
+      width: min(510px, 100%);
+      border-radius: 48px;
+      padding: 14px;
+      transform: rotate(1.5deg);
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.75), rgba(255,255,255,0.18)),
+        linear-gradient(135deg, rgba(200,169,106,0.38), transparent);
+      border: 1px solid rgba(200, 169, 106, 0.32);
+      box-shadow: var(--shadow);
+    }
+
+    .portrait {
+      height: 590px;
+      border-radius: 36px;
+      overflow: hidden;
+      position: relative;
+      background: #ddd;
+    }
+
+    .portrait img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(0.92) contrast(1.03);
+    }
+
+    .portrait::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, transparent 45%, rgba(0,0,0,0.48)),
+        radial-gradient(circle at 20% 20%, rgba(255,255,255,0.20), transparent 30%);
+    }
+
+    .floating-note {
+      position: absolute;
+      left: -20px;
+      bottom: 54px;
+      width: 240px;
+      padding: 20px;
+      border-radius: 26px;
+      transform: rotate(-4deg);
+      z-index: 4;
+    }
+
+    .floating-note strong {
+      font-family: var(--serif);
+      font-size: 1.45rem;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .floating-note p {
+      font-size: 0.86rem;
+      line-height: 1.55;
+    }
+
+    .paint-swipe {
+      position: absolute;
+      right: -25px;
+      top: 70px;
+      width: 170px;
+      height: 70px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--rose), var(--gold), var(--sage));
+      filter: blur(0.2px);
+      opacity: 0.9;
+      transform: rotate(-16deg);
+      z-index: 5;
+      mix-blend-mode: multiply;
+    }
+
+    body.dark .paint-swipe {
+      mix-blend-mode: screen;
+      opacity: 0.65;
+    }
+
+    /* ========================= CARDS & GRIDS ========================= */
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      padding: 28px;
+      border-radius: var(--radius-lg);
+      background: var(--surface);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-soft);
+      transition: 0.28s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(200,169,106,0.14), transparent 38%);
+      opacity: 0;
+      transition: 0.3s ease;
+      pointer-events: none;
+    }
+
+    .card:hover {
+      transform: translateY(-7px);
+      box-shadow: var(--shadow);
+      border-color: rgba(200, 169, 106, 0.34);
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      background: rgba(200, 169, 106, 0.14);
+      color: var(--gold);
+      margin-bottom: 18px;
+      font-size: 1.1rem;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 34px;
+      align-items: center;
+    }
+
+    .art-frame {
+      border-radius: 36px;
+      overflow: hidden;
+      padding: 12px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.86), rgba(200,169,106,0.18));
+      border: 1px solid rgba(200,169,106,0.28);
+      box-shadow: var(--shadow);
+    }
+
+    .art-frame img {
+      height: 500px;
+      width: 100%;
+      object-fit: cover;
+      border-radius: 26px;
+    }
+
+    .list {
+      display: grid;
+      gap: 13px;
+      margin-top: 22px;
+    }
+
+    .list-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.45);
+      border: 1px solid var(--line);
+    }
+
+    body.dark .list-item {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .list-item i {
+      color: var(--gold);
+      margin-top: 4px;
+    }
+
+    .tag-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .tag {
+      padding: 9px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.40);
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-weight: 700;
+      transition: 0.22s ease;
+    }
+
+    body.dark .tag {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .tag:hover {
+      color: var(--text);
+      border-color: rgba(200, 169, 106, 0.5);
+      transform: translateY(-2px);
+    }
+
+    /* ========================= GRADUATION HIGHLIGHT ========================= */
+
+    .grad-card {
+      display: grid;
+      grid-template-columns: 1fr 0.78fr;
+      gap: 26px;
+      border-radius: 38px;
+      padding: 34px;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.78), rgba(255,255,255,0.48)),
+        radial-gradient(circle at top right, rgba(200,169,106,0.28), transparent 35%);
+      border: 1px solid rgba(200,169,106,0.30);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    body.dark .grad-card {
+      background:
+        linear-gradient(135deg, rgba(18,22,32,0.82), rgba(18,22,32,0.55)),
+        radial-gradient(circle at top right, rgba(200,169,106,0.16), transparent 35%);
+    }
+
+    .grad-card::after {
+      content: "BFA";
+      position: absolute;
+      right: 26px;
+      bottom: -30px;
+      font-family: var(--serif);
+      font-size: 9rem;
+      font-weight: 700;
+      color: rgba(200,169,106,0.10);
+    }
+
+    .grad-badge {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      background: #111;
+      color: #f7e7bc;
+      border: 1px solid rgba(255,255,255,0.2);
+      box-shadow: 0 20px 45px rgba(0,0,0,0.20);
+    }
+
+    .grad-badge strong {
+      font-family: var(--serif);
+      font-size: 2.4rem;
+      line-height: 0.9;
+    }
+
+    .grad-badge span {
+      display: block;
+      font-size: 0.66rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-top: 6px;
+    }
+
+    .grad-photo {
+      position: relative;
+      z-index: 2;
+      border-radius: 28px;
+      overflow: hidden;
+      min-height: 320px;
+    }
+
+    .grad-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* ========================= PALETTE ========================= */
+
+    .palette-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .swatch {
+      width: 74px;
+      height: 74px;
+      border-radius: 22px;
+      border: 6px solid rgba(255,255,255,0.6);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+    }
+
+    .swatch span {
+      position: absolute;
+      bottom: -28px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.7rem;
+      color: var(--muted);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    /* ========================= PORTFOLIO ========================= */
+
+    .filter-bar {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+
+    .filter-btn {
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--muted);
+      padding: 11px 15px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 800;
+      font-size: 0.82rem;
+      transition: 0.25s ease;
+    }
+
+    .filter-btn.active,
+    .filter-btn:hover {
+      color: #111;
+      background: linear-gradient(135deg, var(--gold), #efd8a0);
+      border-color: transparent;
+      transform: translateY(-2px);
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 18px;
+    }
+
+    .artwork {
+      grid-column: span 4;
+      min-height: 360px;
+      border-radius: 28px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      box-shadow: var(--shadow-soft);
+      isolation: isolate;
+      background: #ddd;
+    }
+
+    .artwork.tall {
+      grid-row: span 2;
+      min-height: 460px;
+    }
+
+    .artwork.wide {
+      grid-column: span 8;
+    }
+
+    .artwork img {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      inset: 0;
+      object-fit: cover;
+      transition: transform 0.55s ease, filter 0.55s ease;
+    }
+
+    .artwork::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 30%, rgba(0,0,0,0.75));
+      z-index: 1;
+    }
+
+    .artwork-info {
+      position: absolute;
+      z-index: 2;
+      inset: auto 18px 18px 18px;
+      color: #fff;
+      transform: translateY(8px);
+      transition: 0.35s ease;
+    }
+
+    .artwork-info h3 {
+      color: #fff;
+      font-family: var(--serif);
+      font-size: 1.7rem;
+      margin-bottom: 3px;
+    }
+
+    .artwork-info p {
+      color: rgba(255,255,255,0.78);
+      font-size: 0.84rem;
+      line-height: 1.5;
+    }
+
+    .artwork .art-chip {
+      display: inline-flex;
+      padding: 7px 10px;
+      border-radius: 999px;
+      color: #111;
+      background: #efd8a0;
+      font-weight: 900;
+      font-size: 0.72rem;
+      margin-bottom: 10px;
+    }
+
+    .artwork:hover img {
+      transform: scale(1.08);
+      filter: saturate(1.08) contrast(1.05);
+    }
+
+    .artwork:hover .artwork-info {
+      transform: translateY(0);
+    }
+
+    .artwork.hidden {
+      display: none;
+    }
+
+    /* ========================= SKILLS ========================= */
+
+    .skill-card {
+      padding: 18px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.45);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    body.dark .skill-card {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .skill-card i {
+      color: var(--gold);
+    }
+
+    .skill-card span {
+      font-weight: 800;
+      font-size: 0.9rem;
+    }
+
+    /* ========================= PROCESS & TIMELINE ========================= */
+
+    .process {
+      counter-reset: step;
+    }
+
+    .process-card {
+      counter-increment: step;
+    }
+
+    .process-card .step-no::before {
+      content: counter(step, decimal-leading-zero);
+    }
+
+    .step-no {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 54px;
+      height: 54px;
+      border-radius: 18px;
+      background: #111;
+      color: var(--gold);
+      font-weight: 900;
+      margin-bottom: 18px;
+    }
+
+    body.dark .step-no {
+      background: #f7efe2;
+      color: #111;
+    }
+
+    .timeline {
+      position: relative;
+      display: grid;
+      gap: 24px;
+      margin-top: 34px;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 24px;
+      top: 10px;
+      bottom: 10px;
+      width: 1px;
+      background: linear-gradient(var(--gold), transparent);
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-left: 68px;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: 8px;
+      top: 4px;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--surface-solid);
+      border: 1px solid rgba(200,169,106,0.55);
+      display: grid;
+      place-items: center;
+      color: var(--gold);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .timeline-box {
+      padding: 22px;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+    }
+
+    /* ========================= SERVICES / BLOG / TESTIMONIALS ========================= */
+
+    .quote-card {
+      min-height: 230px;
+    }
+
+    .quote {
+      font-family: var(--serif);
+      font-size: 1.55rem;
+      line-height: 1.15;
+      color: var(--text);
+      margin-bottom: 18px;
+    }
+
+    .person {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    .avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: rgba(200,169,106,0.2);
+      color: var(--gold);
+      font-weight: 900;
+    }
+
+    /* ========================= CONTACT ========================= */
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 26px;
+    }
+
+    .contact-form {
+      display: grid;
+      gap: 14px;
+    }
+
+    .field {
+      display: grid;
+      gap: 8px;
+    }
+
+    .field label {
+      font-size: 0.82rem;
+      font-weight: 900;
+      color: var(--text);
+    }
+
+    .field input,
+    .field textarea,
+    .field select {
+      width: 100%;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.62);
+      color: var(--text);
+      padding: 15px 16px;
+      border-radius: 16px;
+      outline: none;
+      transition: 0.22s ease;
+    }
+
+    body.dark .field input,
+    body.dark .field textarea,
+    body.dark .field select {
+      background: rgba(255,255,255,0.06);
+    }
+
+    .field textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    .field input:focus,
+    .field textarea:focus,
+    .field select:focus {
+      border-color: rgba(200,169,106,0.7);
+      box-shadow: 0 0 0 4px rgba(200,169,106,0.12);
+    }
+
+    .contact-line {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .contact-line i {
+      color: var(--gold);
+      width: 24px;
+    }
+
+    .socials {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .socials a {
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      transition: 0.25s ease;
+    }
+
+    .socials a:hover {
+      transform: translateY(-3px);
+      background: var(--gold);
+      color: #111;
+    }
+
+    /* ========================= MODAL ========================= */
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.72);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 22px;
+    }
+
+    .modal.open {
+      display: flex;
+    }
+
+    .modal-card {
+      width: min(1040px, 100%);
+      max-height: 92vh;
+      overflow: auto;
+      border-radius: 30px;
+      background: var(--surface-solid);
+      color: var(--text);
+      display: grid;
+      grid-template-columns: 1fr 0.72fr;
+      box-shadow: 0 30px 90px rgba(0,0,0,0.45);
+      position: relative;
+    }
+
+    .modal-img {
+      min-height: 620px;
+      background: #ddd;
+    }
+
+    .modal-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .modal-content {
+      padding: 34px;
+    }
+
+    .close-modal {
+      position: absolute;
+      right: 16px;
+      top: 16px;
+      z-index: 3;
+      border: none;
+      background: rgba(0,0,0,0.65);
+      color: #fff;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    .art-details {
+      display: grid;
+      gap: 10px;
+      margin: 20px 0;
+    }
+
+    .art-details div {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .art-details strong {
+      color: var(--text);
+    }
+
+    /* ========================= FOOTER / BACK TO TOP ========================= */
+
+    .footer {
+      padding: 44px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .footer strong {
+      font-family: var(--serif);
+      font-size: 1.8rem;
+    }
+
+    .back-to-top {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 999;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(12px);
+    }
+
+    .back-to-top.show {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    /* ========================= ANIMATIONS ========================= */
+
+    [data-reveal] {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: 0.75s ease;
+    }
+
+    [data-reveal].revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .delay-1 { transition-delay: 0.08s; }
+    .delay-2 { transition-delay: 0.16s; }
+    .delay-3 { transition-delay: 0.24s; }
+
+    /* ========================= RESPONSIVE ========================= */
+
+    @media (max-width: 1060px) {
+      .hero-grid,
+      .split,
+      .grad-card,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .portrait-wrap {
+        min-height: auto;
+      }
+
+      .portrait-card {
+        position: relative;
+        width: 100%;
+      }
+
+      .artwork,
+      .artwork.wide {
+        grid-column: span 6;
+      }
+
+      .modal-card {
+        grid-template-columns: 1fr;
+      }
+
+      .modal-img {
+        min-height: 420px;
+      }
+    }
+
+    @media (max-width: 880px) {
+      .menu-btn {
+        display: grid;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 76px;
+        left: 16px;
+        right: 16px;
+        border-radius: 24px;
+        flex-direction: column;
+        align-items: stretch;
+        padding: 14px;
+        background: var(--surface-solid);
+        border: 1px solid var(--line);
+        box-shadow: var(--shadow);
+        transform: translateY(-14px);
+        opacity: 0;
+        pointer-events: none;
+        transition: 0.25s ease;
+      }
+
+      .nav-links.open {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .nav-links a {
+        padding: 14px 16px;
+      }
+
+      .section-head {
+        display: block;
+      }
+
+      .section-head p {
+        margin-top: 14px;
+      }
+
+      .grid-2,
+      .grid-3,
+      .grid-4 {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-meta {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        width: min(100% - 28px, var(--max));
+      }
+
+      .hero {
+        padding-top: 130px;
+      }
+
+      .portrait {
+        height: 430px;
+      }
+
+      .floating-note {
+        position: relative;
+        left: auto;
+        bottom: auto;
+        margin-top: 16px;
+        width: 100%;
+        transform: none;
+      }
+
+      .paint-swipe {
+        width: 120px;
+        right: 4px;
+      }
+
+      .portfolio-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+
+      .artwork,
+      .artwork.wide,
+      .artwork.tall {
+        grid-column: auto;
+        min-height: 330px;
+      }
+
+      .section {
+        padding: 74px 0;
+      }
+
+      .grad-card {
+        padding: 22px;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .nav {
+        top: 10px;
+        width: calc(100% - 20px);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page-texture"></div>
+
+  <!-- ========================= NAVIGATION ========================= -->
+  <nav class="nav glass" aria-label="Main Navigation">
+    <a href="#home" class="brand">
+      <span class="brand-mark"><i class="fa-solid fa-palette"></i></span>
+      <span>[Graduate Name]</span>
+    </a>
+
+    <div class="nav-links" id="navLinks">
+      <a href="#about">About</a>
+      <a href="#identity">Identity</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="#project">Project</a>
+      <a href="#services">Services</a>
+      <a href="#contact">Contact</a>
+    </div>
+
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeToggle" aria-label="Toggle dark mode">
+        <i class="fa-solid fa-moon"></i>
+      </button>
+      <button class="icon-btn menu-btn" id="menuBtn" aria-label="Open menu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ========================= HERO SECTION ========================= -->
+  <header class="hero" id="home">
+    <div class="container hero-grid">
+      <div data-reveal>
+        <div class="hero-kicker">
+          <span class="pill"><i class="fa-solid fa-graduation-cap"></i> Fine Arts Graduate</span>
+          <span class="pill"><i class="fa-solid fa-brush"></i> Visual Artist</span>
+          <span class="pill"><i class="fa-solid fa-location-dot"></i> [City, Country]</span>
+        </div>
+
+        <p class="eyebrow">A new creative journey begins</p>
+        <h1>[Graduate Name]</h1>
+        <div class="hero-title-note">Turning Imagination into Visual Stories</div>
+        <p class="lead">
+          A passionate emerging artist and recent fine arts graduate exploring the relationship between emotion,
+          identity, color, and visual storytelling through contemporary artistic practice.
+        </p>
+
+        <div class="btn-row">
+          <a href="#portfolio" class="btn btn-primary"><i class="fa-solid fa-images"></i> View Portfolio</a>
+          <a href="cv.pdf" class="btn btn-ghost" download><i class="fa-solid fa-file-arrow-down"></i> Download CV</a>
+          <a href="#contact" class="btn btn-ghost"><i class="fa-solid fa-paper-plane"></i> Contact Me</a>
+        </div>
+
+        <div class="hero-meta">
+          <div class="meta-card">
+            <strong>[University Name]</strong>
+            <span>University</span>
+          </div>
+          <div class="meta-card">
+            <strong>[Major / Department]</strong>
+            <span>Specialization</span>
+          </div>
+          <div class="meta-card">
+            <strong>[Graduation Year]</strong>
+            <span>Graduation Year</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="portrait-wrap" data-reveal>
+        <div class="paint-swipe"></div>
+        <div class="portrait-card">
+          <div class="portrait">
+            <!-- Replace this image with the graduate portrait or studio photo -->
+            <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=1100&q=85" alt="Artist working in studio">
+          </div>
+        </div>
+
+        <div class="floating-note glass">
+          <strong>Artist / Fine Arts Graduate</strong>
+          <p>Crafting expressive visuals with purpose, sensitivity, and a refined contemporary voice.</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ========================= ABOUT ME ========================= -->
+    <section class="section" id="about">
+      <div class="container split">
+        <div class="art-frame" data-reveal>
+          <img src="https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?auto=format&fit=crop&w=1100&q=85" alt="Art studio details">
+        </div>
+
+        <div data-reveal>
+          <p class="eyebrow">About Me</p>
+          <h2>Art shaped by curiosity, emotion, and visual elegance.</h2>
+          <p>
+            I am a recent fine arts graduate with a deep passion for visual expression, artistic experimentation,
+            and meaningful storytelling. My work reflects a constant search for beauty, balance, and emotion,
+            combining academic training with personal observation and creative intuition.
+          </p>
+          <p>
+            As an emerging artist, I believe that every artwork is a conversation between memory, feeling, and form.
+            I am currently developing my own visual language through color, texture, composition, and concept-driven
+            practice, while building a professional portfolio that represents the beginning of my creative journey.
+          </p>
+
+          <div class="list">
+            <div class="list-item">
+              <i class="fa-solid fa-circle-check"></i>
+              <p><strong>Creative Focus:</strong> [Painting / Digital Art / Graphic Design / Photography]</p>
+            </div>
+            <div class="list-item">
+              <i class="fa-solid fa-circle-check"></i>
+              <p><strong>Professional Goal:</strong> To create visual experiences that inspire, communicate, and remain memorable.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================= GRADUATION HIGHLIGHT ========================= -->
+    <section class="section section-tight" id="graduation">
+      <div class="container">
+        <div class="grad-card" data-reveal>
+          <div>
+            <p class="eyebrow">Graduation Highlight</p>
+            <h2>Graduation is not the end — it is the first gallery of the future.</h2>
+            <p>
+              Graduated in <strong>[Graduation Year]</strong> from <strong>[University Name]</strong>,
+              <strong>[College / Department]</strong>, specializing in <strong>[Specialization]</strong>.
+              This milestone represents years of exploration, discipline, critiques, studio practice,
+              and the courage to build a personal artistic voice.
+            </p>
+
+            <div class="tag-cloud">
+              <span class="tag">Bachelor of Fine Arts</span>
+              <span class="tag">Graduation Achievement</span>
+              <span class="tag">Portfolio Development</span>
+              <span class="tag">Creative Practice</span>
+            </div>
+
+            <div class="btn-row">
+              <a href="#project" class="btn btn-primary"><i class="fa-solid fa-award"></i> View Graduation Project</a>
+            </div>
+          </div>
+
+          <div>
+            <div class="grad-badge">
+              <div>
+                <strong>[Year]</strong>
+                <span>Graduate</span>
+              </div>
+            </div>
+            <div class="grad-photo" style="margin-top: 18px;">
+              <img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?auto=format&fit=crop&w=900&q=85" alt="Graduation celebration">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================= ARTISTIC IDENTITY ========================= -->
+    <section class="section" id="identity">
+      <div class="container">
+        <div class="section-head">
+          <div data-reveal>
+            <p class="eyebrow">Artistic Identity</p>
+            <h2>The visual language behind the work.</h2>
+          </div>
+          <p data-reveal>
+            A personal identity built through style, inspiration, palette, message, and expressive themes.
+          </p>
+        </div>
+
+        <div class="grid-2">
+          <div class="card" data-reveal>
+            <div class="icon"><i class="fa-solid fa-brush"></i></div>
+            <h3>Art Style</h3>
+            <p>
+              Contemporary expressive work blending refined composition, emotional color, soft textures,
+              and conceptual storytelling. The style can be adjusted to match painting, digital art,
+              photography, sculpture, or design.
+            </p>
+          </div>
+
+          <div class="card" data-reveal>
+            <div class="icon"><i class="fa-solid fa-lightbulb"></i></div>
+            <h3>Inspiration</h3>
+            <p>
+              Inspired by human emotion, cultural identity, nature, light, memory, architecture, music,
+              daily observations, and the quiet details that often go unnoticed.
+            </p>
+          </div>
+
+          <div class="card" data-reveal>
+            <div class="icon"><i class="fa-solid fa-message"></i></div>
+            <h3>Artistic Message</h3>
+            <p>
+              My work aims to transform personal reflection into visual experiences that invite viewers
+              to pause, feel, question, and connect with their own inner stories.
+            </p>
+          </div>
+
+          <div class="card" data-reveal>
+            <div class="icon"><i class="fa-solid fa-water"></i></div>
+            <h3>Favorite Themes</h3>
+            <p>
+              Humanity, nature, identity, society, imagination, culture, emotion, transformation,
+              silence, growth, and the relationship between the visible and invisible.
+            </p>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top: 24px;" data-reveal>
+          <h3>Color Palette</h3>
+          <p>Soft neutrals, deep contrast, muted artistic tones, and elegant gold accents.</p>
+          <div class="palette-row" aria-label="Color palette">
+            <div class="swatch" style="background:#f8f4ee"><span>Ivory</span></div>
+            <div class="swatch" style="background:#111827"><span>Navy</span></div>
+            <div class="swatch" style="background:#c8a96a"><span>Soft Gold</span></div>
+            <div class="swatch" style="background:#9caa9a"><span>Sage</span></div>
+            <div class="swatch" style="background:#d7aaa2"><span>Rose Clay</span></div>
+            <div class="swatch" style="background:#1b1b1b"><span>Ink</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================= EDUCATION ========================= -->
+    <section class="section section-tight" id="education">
+      <div class="container">
+        <div class="section-head">
+          <div data-reveal>
+            <p class="eyebrow">Education</p>
+            <h2>Academic foundation and studio training.</h2>
+          </div>
+          <p data-reveal>
+            Replace the degree, years, and university details with the graduate’s real information.
+          </p>
+        </div>
+
+        <div class="grid-2">
+          <div class="card" data-reveal>
+            <div class="icon"><i class="fa-solid fa-graduation-cap"></i></div>
+            <h3>Bachelor of Fine Arts / Visual Arts / Design</h3>
+            <p><strong>[University Name]</strong></p>
+            <p>[Study Years] · [City, Country]</p>
+            <p>
+              Developed technical, conceptual, and presentation skills through studio practice,
+              research, critiques, exhibitions, and professional portfolio preparation.
+            </p>
+          </div>
+
+          <div class="card" data-reveal>
+            <div class="icon"><i class="fa-solid fa-book-open"></i></div>
+            <h3>Selected Coursework</h3>
+            <div class="tag-cloud">
+              <span class="tag">Drawing</span>
+              <span class="tag">Painting</span>
+              <span class="tag">Color Theory</span>
+              <span class="tag">Art History</span>
+              <span class="tag">Visual Communication</span>
+              <span class="tag">Design Principles</span>
+              <span class="tag">Photography</span>
+              <span class="tag">Sculpture</span>
+              <span class="tag">Digital Illustration</span>
+              <span class="tag">Typography</span>
+              <span class="tag">Printmaking</span>
+              <span class="tag">Portfolio Development</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================= GRADUATION PROJECT ========================= -->
+    <section class="section" id="project">
+      <div class="container split">
+        <div data-reveal>
+          <p class="eyebrow">Graduation Project</p>
+          <h2>[Graduation Project Title]</h2>
+          <p>
+            A concept-driven artistic project exploring <strong>[project theme]</strong> through
+            <strong>[medium / technique]</strong>. The work investigates the connection between visual form,
+            emotional memory, cultural symbols, and contemporary expression.
+          </p>
+
+          <div class="list">
+            <div class="list-item"><i class="fa-solid fa-bullseye"></i><p><strong>Objective:</strong> To communicate a meaningful visual message through a refined artistic composition.</p></div>
+            <div class="list-item"><i class="fa-solid fa-screwdriver-wrench"></i><p><strong>Materials:</strong> [Acrylic / Oil / Watercolor / Digital Tablet / Clay / Mixed Media]</p></div>
+            <div class="list-item"><i class="fa-solid fa-user-tie"></i><p><strong>Supervisor:</strong> [Supervisor Name]</p></div>
+            <div class="list-item"><i class="fa-solid fa-quote-left"></i><p><strong>Project Message:</strong> Art can preserve feelings, question reality, and give shape to the unseen.</p></div>
+          </div>
+
+          <div class="btn-row">
+            <a href="#portfolio" class="btn btn-primary"><i class="fa-solid fa-up-right-from-square"></i> View Project</a>
+          </div>
+        </div>
+
+        <div class="art-frame" data-reveal>
+          <img src="https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=1100&q=85" alt="Graduation art project">
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================= PORTFOLIO GALLERY ========================= -->
+    <section class="section" id="portfolio">
+      <div class="container">
+        <div class="section-head">
+          <div data-reveal>
+            <p class="eyebrow">Portfolio Gallery</p>
+            <h2>A curated selection of visual works.</h2>
+          </div>
+          <p data-reveal>
+            Click any artwork to view its title, year, technique, size, description, and concept.
+          </p>
+        </div>
+
+        <div class="filter-bar" data-reveal>
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="painting">Painting</button>
+          <button class="filter-btn" data-filter="drawing">Drawing</button>
+          <button class="filter-btn" data-filter="digital">Digital Art</button>
+          <button class="filter-btn" data-filter="photo">Photography</button>
+          <button class="filter-btn" data-filter="design">Graphic Design</button>
+          <button class="filter-btn" data-filter="sculpture">Sculpture</button>
+          <button class="filter-btn" data-filter="mixed">Mixed Media</button>
+          <button class="filter-btn" data-filter="graduation">Graduation Project</button>
+        </div>
+
+        <div class="portfolio-grid">
+          <article class="artwork tall" data-category="painting" data-title="Silent Bloom" data-year="2026" data-technique="Acrylic on Canvas" data-size="70 × 100 cm" data-description="A poetic study of growth, silence, and emotional renewal." data-image="https://images.unsplash.com/photo-1541961017774-22349e4a1262?auto=format&fit=crop&w=1100&q=85" data-reveal>
+            <img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?auto=format&fit=crop&w=1100&q=85" alt="Silent Bloom artwork">
+            <div class="artwork-info">
+              <span class="art-chip">Painting</span>
+              <h3>Silent Bloom</h3>
+              <p>Acrylic on Canvas · 2026</p>
+            </div>
+          </article>
+
+          <article class="artwork" data-category="drawing" data-title="Human Lines" data-year="2025" data-technique="Charcoal and Pencil" data-size="42 × 59 cm" data-description="A study of expressive human form through sensitive line work." data-image="https://images.unsplash.com/photo-1605721911519-3dfeb3be25e7?auto=format&fit=crop&w=1100&q=85" data-reveal>
+            <img src="https://images.unsplash.com/photo-1605721911519-3dfeb3be25e7?auto=format&fit=crop&w=1100&q=85" alt="Drawing artwork">
+            <div class="artwork-info">
+              <span class="art-chip">Drawing</span>
+              <h3>Human Lines</h3>
+              <p>Charcoal and Pencil · 2025</p>
+            </div>
+          </article>
+
+          <article class="artwork" data-category="digital" data-title="Digital Memory" data-year="2026" data-technique="Digital Illustration" data-size="3000 × 4000 px" data-description="An experimental digital artwork exploring memory and imagined spaces." data-image="https://images.unsplash.com/photo-1634986666676-ec8fd927c23d?auto=format&fit=crop&w=1100&q=85" data-reveal>
+            <img src="https://images.unsplash.com/photo-1634986666676-ec8fd927c23d?auto=format&fit=crop&w=1100&q=85" alt="Digital art">
+            <div class="artwork-info">
+              <span class="art-chip">Digital Art</span>
+              <h3>Digital Memory</h3>
+              <p>Digital Illustration · 2026</p>
+            </div>
+          </article>
+
+          <article class="artwork wide" data-category="graduation" data-title="Thresholds of Becoming" data-year="2026" data-technique="Mixed Media Installation" data-size="Variable Dimensions" data-description="Graduation project about transition, identity, and the first step into an artistic future." data-image="https://images.unsplash.com/photo-1577720643272-265f09367456?auto=format&fit=crop&w=1300&q=85" data-reveal>
+            <img src="https://images.unsplash.com/photo-1577720643272-265f09367456?auto=format&fit=crop&w=1300&q=85" alt="Graduation project artwork">
+            <div class="artwork-info">
+              <span class="art-chip">Graduation Project</span>
+              <h3>Thresholds of Becoming</h3>
+              <p>Mixed Media Installation · 2026</p>
+            </div>
+          </article>
+
+          <article class="artwork" data-category="photo" data-title="Light Study" data-year="2025" data-technique="Digital Photography" data-size="Series of 6" data-description="A photography series studying shadow, architecture, and quiet moments." data-image="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?auto=format&fit=crop&w=1100&q=85" data-reveal>
+            <img src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?auto=format&fit=crop&w=1100&q=85" alt="Photography artwork">
+            <div class="artwork-info">
+              <span class="art-chip">Photography</span>
+              <h3>Light Study</h3>
+              <p>Digital Photography · 2025</p>
+            </div>
+          </article>
+
+          <article class="artwork" data-category="design" data-title="Cultural Poster" data-year="2025" data-technique="Graphic Design" data-size="A2 Poster" data-description="A poster design combining typography, heritage, and contemporary layout." data-image="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1100&q=85" data-reveal>
+            <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1100&q=85" alt="Graphic design work">
+            <div class="artwork-info">
+              <span class="art-chip">Graphic Design</span>
+              <h3>Cultural Poster</h3>
+              <p>Graphic Design · 2025</p>
+            </div>
+          </article>
+
+          <article class="artwork" data-category="sculpture" data-title="Soft Structure" data-year="2024" data-technique="Clay Sculpture" data-size="30 × 22 × 18 cm" data-description="A sculptural study of organic form, tension, and material presence." data-image="https://images.unsplash.com/photo-1493106819501-66d381c466f1?auto=format&fit=crop&w=1100&q=85" data-reveal>
+            <img src="https://images.unsplash.com/photo-1493106819501-66d381c466f1?auto=format&fit=crop&w=1100&q=85" alt="Sculpture work">
+            <div class="artwork-info">
+              <span class="art-chip">Sculpture</span>
+              <h3>Soft Structure</h3>
+              <p>Clay Sculpture · 2024</p>
+            </div>
+          </article>
+
+          <article class="artwork" data-category="mixed" data-title="Fragments" data-year="2026" data-technique="Mixed Media" data-size="50 × 70 cm" data-description="Layered textures and found visual elements forming a story of memory." data-image="https://images.unsplash.com/photo-1579541814924-49fef17c5be5?auto=format&fit=crop&w=1100&q=85" data-reveal>
+            <img src="https://images.unsplash.com/photo-1579541814924-49fef17c5be5?auto=format&fit=crop&w=1100&q=85" alt="Mixed media artwork">
+            <div class="artwork-info">
+              <span class="art-chip">Mixed Media</span>
+              <h3>Fragments</h3>
+              <p>Mixed Media · 2026</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================= SKILLS ========================= -->
+    <section class="section section-tight" id="skills">
+      <div class="container">
+        <div class="section-head">
+          <div data-reveal>
+            <p class="eyebrow">Skills</p>
+            <h2>Creative and professional capabilities.</h2>
+          </div>
+        </div>
+
+        <div class="grid-4" data-reveal>
+          <div class="skill-card"><i class="fa-solid fa-pen-nib"></i><span>Drawing</span></div>
+          <div class="skill-card"><i class="fa-solid fa-brush"></i><span>Painting</span></div>
+          <div class="skill-card"><i class="fa-solid fa-pencil"></i><span>Sketching</span></div>
+          <div class="skill-card"><i class="fa-solid fa-tablet-screen-button"></i><span>Digital Illustration</span></div>
+          <div class="skill-card"><i class="fa-solid fa-droplet"></i><span>Color Theory</span></div>
+          <div class="skill-card"><i class="fa-solid fa-crop-simple"></i><span>Composition</span></div>
+          <div class="skill-card"><i class="fa-solid fa-brain"></i><span>Creative Thinking</span></div>
+          <div class="skill-card"><i class="fa-solid fa-book-open"></i><span>Visual Storytelling</span></div>
+          <div class="skill-card"><i class="fa-solid fa-lightbulb"></i><span>Concept Development</span></div>
+          <div class="skill-card"><i class="fa-solid fa-camera"></i><span>Photography</span></div>
+          <div class="skill-card"><i class="fa-brands fa-adobe"></i><span>Adobe Photoshop</span></div>
+          <div class="skill-card"><i class="fa-solid fa-vector-square"></i><span>Adobe Illustrator</span></div>
+          <div class="skill-card"><i class="fa-solid fa-layer-group"></i><span>Adobe InDesign</span></div>
+          <div class="skill-card"><i class="fa-solid fa-paintbrush"></i><span>Procreate</span></div>
+          <div class="skill-card"><i class="fa-brands fa-figma"></i><span>Figma</span></div>
+          <div class="skill-card"><i class="fa-solid fa-clock"></i><span>Time Management</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================= TOOLS & MATERIALS ========================= -->
+    <section class="section" id="tools">
+      <div class="container">
+        <div class="section-head">
+          <div data-reveal>
+            <p class="eyebrow">Tools & Materials</p>
+            <h2>Mediums used to shape the visual experience.</h2>
+          </div>
+        </div>
+
+        <div class="tag-cloud" data-reveal>
+          <span class="tag">Acrylic Paint</span>
+          <span class="tag">Oil Paint</span>
+          <span class="tag">Watercolor</span>
+          <span class="tag">Charcoal</span>
+          <span class="tag">Pencil</span>
+          <span class="tag">Ink</span>
+          <span class="tag">Canvas</span>
+          <span class="tag">Clay</span>
+          <span class="tag">Digital Tablet</span>
+          <span class="tag">Camera</span>
+          <span class="tag">Adobe Creative Suite</span>
+          <span class="tag">Sketchbook</span>
+          <span class="tag">Mixed Media Materials</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================= EXHIBITIONS & AWARDS ========================= -->
+    <section class="section section-tight" id="exhibitions">
+      <div class="container">
+        <div class="grid-2">
+          <div data-reveal>
+            <p class="eyebrow">Exhibitions & Participation</p>
+            <h2>Creative presence and participation.</h2>
+            <div class="list">
+              <div class="list-item"><i class="fa-solid fa-building-columns"></i><p><strong>University Art Exhibition</strong> — Selected student artworks showcased on campus.</p></div>
+              <div class="list-item"><i class="fa-solid fa-images"></i><p><strong>Graduation Project Show</strong> — Final project presentation and portfolio display.</p></div>
+              <div class="list-item"><i class="fa-solid fa-people-group"></i><p><strong>Local Art Workshop</strong> — Participated in collaborative creative practice sessions.</p></div>
+              <div class="list-item"><i class="fa-solid fa-star"></i><p><strong>Open Studio Day</strong> — Presented studio works to visitors, students, and faculty.</p></div>
+            </div>
+          </div>
+
+          <div data-reveal>
+            <p class="eyebrow">Awards & Achievements</p>
+            <h2>Recognition and milestones.</h2>
+            <div class="list">
+              <div class="list-item"><i class="fa-solid fa-medal"></i><p>Graduation Achievement</p></div>
+              <div class="list-item"><i class="fa-solid fa-trophy"></i><p>Best Graduation Project Nomination</p></div>
+              <div class="list-item"><i class="fa-solid fa-award"></i><p>Academic Excellence Recognition</p></div>
+              <div class="list-item"><i class="fa-solid fa-certificate"></i><p>Workshop Certificates</p></div>
+              <div class="list-item"><i class="fa-solid fa-palette"></i><p>Creative Portfolio Recognition</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================= WORKSHOPS ========================= -->
+    <section class="section" id="workshops">
+      <div class="container">
+        <div class="section-head">
+          <div data-reveal>
+            <p class="eyebrow">Workshops & Courses</p>
+            <h2>Continuous learning and creative growth.</h2>
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <div class="card" data-reveal><div class="icon"><i class="fa-solid fa-brush"></i></div><h3>Painting Workshop</h3><p>Exploring surface, texture, color mixing, and expressive brushwork.</p></div>
+          <div class="card" data-reveal><div class="icon"><i class="fa-solid fa-tablet"></i></div><h3>Digital Art Workshop</h3><p>Creating professional digital illustrations and concept visuals.</p></div>
+          <div class="card" data-reveal><div class="icon"><i class="fa-solid fa-camera-retro"></i></div><h3>Photography Course</h3><p>Understanding light, framing, editing, and visual narrative.</p></div>
+          <div class="card" data-reveal><div class="icon"><i class="fa-solid fa-pen-ruler"></i></div><h3>Graphic Design Course</h3><p>Working with layout, typography, branding, and visual communication.</p></div>
+          <div class="card" data-reveal><div class="icon"><i class="fa-solid fa-landmark"></i></div><h3>Art History Seminar</h3><p>Learning how movements, artists, and contexts shape visual culture.</p></div>
+          <div class="card" data-reveal><div class="icon"><i class="fa-solid fa-folder-open"></i></div><h3>Portfolio Building Workshop</h3><p>Curating artworks professionally for galleries, clients, and employers.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================= CREATIVE PROCESS ========================= -->
+    <section class="section section-tight" id="process">
+      <div class="container">
+        <div class="section-head">
+          <div data-reveal>
+            <p class="eyebrow">Creative Process</p>
+            <h2>From first idea to final presentation.</h2>
+          </div>
+        </div>
+
+        <div class="grid-3 process">
+          <div class="card process-card" data-reveal><span class="step-no"></span><h3>Research & Inspiration</h3><p>Collecting references, studying themes, and building a conceptual direction.</p></div>
+          <div class="card process-card" data-reveal><span class="step-no"></span><h3>Sketching Ideas</h3><p>Exploring forms, compositions, visual rhythm, and possible narratives.</p></div>
+          <div class="card process-card" data-reveal><span class="step-no"></span><h3>Choosing Colors</h3><p>Building a palette that supports the emotion and meaning of the artwork.</p></div>
+          <div class="card process-card" data-reveal><span class="step-no"></span><h3>Experimenting</h3><p>Testing materials, textures, digital effects, layers, and surface qualities.</p></div>
+          <div class="card process-card" data-reveal><span class="step-no"></span><h3>Final Artwork</h3><p>Refining details, balancing composition, and completing the final piece.</p></div>
+          <div class="card process-card" data-reveal><span class="step-no"></span><h3>Reflection & Presentation</h3><p>Documenting, writing about the work, and presenting it professionally.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================= TIMELINE ========================= -->
+    <section class="section" id="timeline">
+      <div class="container">
+        <div class="section-head">
+          <div data-reveal>
+            <p class="eyebrow">Timeline</p>
+            <h2>The journey from student to emerging artist.</h2>
+          </div>
+        </div>
+
+        <div class="timeline" data-reveal>
+          <div class="timeline-item"><div class="timeline-dot"><i class="fa-solid fa-seedling"></i></div><div class="timeline-box"><h3>Beginning Fine Arts Study</h3><p>Started building the academic and creative foundation for artistic practice.</p></div></div>
+          <div class="timeline-item"><div class="timeline-dot"><i class="fa-solid fa-pencil"></i></div><div class="timeline-box"><h3>Learning Drawing & Design Fundamentals</h3><p>Developed technical control, observation, composition, and visual balance.</p></div></div>
+          <div class="timeline-item"><div class="timeline-dot"><i class="fa-solid fa-fingerprint"></i></div><div class="timeline-box"><h3>Discovering Personal Style</h3><p>Experimented with themes, materials, and forms to shape a unique voice.</p></div></div>
+          <div class="timeline-item"><div class="timeline-dot"><i class="fa-solid fa-images"></i></div><div class="timeline-box"><h3>First Exhibition Participation</h3><p>Presented selected works and gained public presentation experience.</p></div></div>
+          <div class="timeline-item"><div class="timeline-dot"><i class="fa-solid fa-folder"></i></div><div class="timeline-box"><h3>Portfolio Development</h3><p>Curated artworks professionally for future opportunities.</p></div></div>
+          <div class="timeline-item"><div class="timeline-dot"><i class="fa-solid fa-award"></i></div><div class="timeline-box"><h3>Graduation Project</h3><p>Completed a final project representing research, identity, and artistic maturity.</p></div></div>
+          <div class="timeline-item"><div class="timeline-dot"><i class="fa-solid fa-graduation-cap"></i></div><div class="timeline-box"><h3>Graduation Day</h3><p>Marked the transition from student practice to professional creative growth.</p></div></div>
+          <div class="timeline-item"><div class="timeline-dot"><i class="fa-solid fa-arrow-trend-up"></i></div><div class="timeline-box"><h3>Beginning the Creative Career</h3><p>Building exhibitions, collaborations, services, and meaningful visual experiences.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================= ARTIST STATEMENT ========================= -->
+    <section class="section section-tight" id="statement">
+      <div class="container">
+        <div class="card" data-reveal>
+          <p class="eyebrow">Artist Statement</p>
+          <h2>Why I create art.</h2>
+          <p class="lead">
+            I create art to translate inner emotions into visual forms that can be seen, felt, and remembered.
+            My practice is rooted in observation, sensitivity, and the belief that images can express what words
+            often cannot. Through color, texture, and composition, I explore identity, memory, human connection,
+            and the quiet tension between reality and imagination. As an emerging artist, I see every work as
+            a step toward a clearer voice — one that speaks with honesty, beauty, and purpose.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================= SERVICES ========================= -->
+    <section class="section" id="services">
+      <div class="container">
+        <div class="section-head">
+          <div data-reveal>
+            <p class="eyebrow">Services</p>
+            <h2>Creative services for clients and collaborators.</h2>
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <div class="card" data-reveal><div class="icon"><i class="fa-solid fa-paintbrush"></i></div><h3>Custom Artwork</h3><p>Original artworks created for personal, interior, or professional spaces.</p></div>
+          <div class="card" data-reveal><div class="icon"><i class="fa-solid fa-user"></i></div><h3>Portrait Drawing</h3><p>Expressive hand-drawn or digital portraits with refined details.</p></div>
+          <div class="card" data-reveal><div class="icon"><i class="fa-solid fa-tablet-screen-button"></i></div><h3>Digital Illustration</h3><p>Creative illustrations for editorial, social, personal, or brand use.</p></div>
+          <div class="card" data-reveal><div class="icon"><i class="fa-solid fa-pen-ruler"></i></div><h3>Graphic Design</h3><p>Posters, visual identities, layouts, social media graphics, and print material.</p></div>
+          <div class="card" data-reveal><div class="icon"><i class="fa-solid fa-camera"></i></div><h3>Photography</h3><p>Artistic photography sessions, visual documentation, and project photography.</p></div>
+          <div class="card" data-reveal><div class="icon"><i class="fa-solid fa-chalkboard-user"></i></div><h3>Art Workshops</h3><p>Introductory creative sessions in drawing, painting, or visual thinking.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================= TESTIMONIALS ========================= -->
+    <section class="section section-tight" id="testimonials">
+      <div class="container">
+        <div class="section-head">
+          <div data-reveal>
+            <p class="eyebrow">Testimonials</p>
+            <h2>Words from mentors, peers, and viewers.</h2>
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <div class="card quote-card" data-reveal>
+            <p class="quote">“A thoughtful young artist with a sensitive eye and a mature visual direction.”</p>
+            <p>University Professor</p>
+            <div class="person"><div class="avatar">P</div><strong>[Professor Name]</strong></div>
+          </div>
+          <div class="card quote-card" data-reveal>
+            <p class="quote">“The graduation project showed strong research, emotional clarity, and refined execution.”</p>
+            <p>Graduation Project Supervisor</p>
+            <div class="person"><div class="avatar">S</div><strong>[Supervisor Name]</strong></div>
+          </div>
+          <div class="card quote-card" data-reveal>
+            <p class="quote">“The portfolio feels elegant, honest, and full of promise.”</p>
+            <p>Gallery Visitor</p>
+            <div class="person"><div class="avatar">V</div><strong>[Visitor Name]</strong></div>
+          </div>
+          <div class="card quote-card" data-reveal>
+            <p class="quote">“A creative collaborator who understands both beauty and meaning.”</p>
+            <p>Creative Peer</p>
+            <div class="person"><div class="avatar">C</div><strong>[Colleague Name]</strong></div>
+          </div>
+          <div class="card quote-card" data-reveal>
+            <p class="quote">“The commissioned artwork added character and warmth to my space.”</p>
+            <p>Client</p>
+            <div class="person"><div class="avatar">C</div><strong>[Client Name]</strong></div>
+          </div>
+          <div class="card quote-card" data-reveal>
+            <p class="quote">“Clear visual identity, strong presentation, and a professional attitude.”</p>
+            <p>Design Reviewer</p>
+            <div class="person"><div class="avatar">D</div><strong>[Reviewer Name]</strong></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================= FUTURE GOALS ========================= -->
+    <section class="section" id="future">
+      <div class="container split">
+        <div data-reveal>
+          <p class="eyebrow">Future Goals</p>
+          <h2>Building a meaningful creative path.</h2>
+          <p>
+            The next chapter focuses on developing a stronger artistic voice, expanding the portfolio,
+            participating in exhibitions, and building collaborations across creative industries.
+          </p>
+
+          <div class="tag-cloud">
+            <span class="tag">Professional Portfolio</span>
+            <span class="tag">Exhibitions</span>
+            <span class="tag">Unique Artistic Voice</span>
+            <span class="tag">Creative Collaboration</span>
+            <span class="tag">Meaningful Visual Experiences</span>
+            <span class="tag">Continuous Experimentation</span>
+          </div>
+        </div>
+
+        <div class="card" data-reveal>
+          <div class="icon"><i class="fa-solid fa-route"></i></div>
+          <h3>Creative Ambition</h3>
+          <p>
+            To contribute to the artistic community through expressive work, thoughtful design,
+            and visual projects that carry emotional, cultural, and aesthetic value.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================= BLOG / REFLECTIONS ========================= -->
+    <section class="section section-tight" id="blog">
+      <div class="container">
+        <div class="section-head">
+          <div data-reveal>
+            <p class="eyebrow">Blog / Reflections</p>
+            <h2>Stories behind the practice.</h2>
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <article class="card" data-reveal><div class="icon"><i class="fa-solid fa-feather"></i></div><h3>My Graduation Project Story</h3><p>A reflection on the idea, process, challenges, and message behind the final project.</p></article>
+          <article class="card" data-reveal><div class="icon"><i class="fa-solid fa-fingerprint"></i></div><h3>How I Found My Art Style</h3><p>Thoughts on experimentation, critique, inspiration, and visual identity.</p></article>
+          <article class="card" data-reveal><div class="icon"><i class="fa-solid fa-earth-americas"></i></div><h3>The Role of Art in Society</h3><p>A short reflection on how art can communicate, question, heal, and connect people.</p></article>
+          <article class="card" data-reveal><div class="icon"><i class="fa-solid fa-droplet"></i></div><h3>My Favorite Mediums</h3><p>Why certain tools, materials, and textures feel closest to my creative voice.</p></article>
+          <article class="card" data-reveal><div class="icon"><i class="fa-solid fa-eye"></i></div><h3>Behind the Artwork</h3><p>Notes about selected artworks, hidden details, and the concepts behind them.</p></article>
+          <article class="card" data-reveal><div class="icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div><h3>Creative Experiments</h3><p>Documenting tests, sketches, color studies, and unfinished ideas.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================= CONTACT ========================= -->
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="section-head">
+          <div data-reveal>
+            <p class="eyebrow">Contact</p>
+            <h2>Let’s create something meaningful.</h2>
+          </div>
+          <p data-reveal>
+            For exhibitions, commissions, design work, collaborations, workshops, or portfolio inquiries.
+          </p>
+        </div>
+
+        <div class="contact-grid">
+          <div class="card" data-reveal>
+            <h3>Contact Details</h3>
+            <p>Replace these placeholders with real contact information.</p>
+
+            <div class="contact-line"><i class="fa-solid fa-envelope"></i><a href="mailto:[email@example.com]">[email@example.com]</a></div>
+            <div class="contact-line"><i class="fa-solid fa-phone"></i><a href="tel:[phone]">[phone number]</a></div>
+            <div class="contact-line"><i class="fa-solid fa-location-dot"></i><span>[City, Country]</span></div>
+
+            <div class="socials">
+              <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+              <a href="#" aria-label="Behance"><i class="fa-brands fa-behance"></i></a>
+              <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+              <a href="#" aria-label="Portfolio"><i class="fa-solid fa-globe"></i></a>
+              <a href="#" aria-label="CV"><i class="fa-solid fa-file-lines"></i></a>
+            </div>
+          </div>
+
+          <form class="card contact-form" id="contactForm" data-reveal>
+            <div class="field">
+              <label for="name">Name</label>
+              <input id="name" name="name" type="text" placeholder="Your name" required>
+            </div>
+
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" placeholder="you@example.com" required>
+            </div>
+
+            <div class="field">
+              <label for="request">Request Type</label>
+              <select id="request" name="request">
+                <option>Commissioned Artwork</option>
+                <option>Exhibition Invitation</option>
+                <option>Graphic Design</option>
+                <option>Photography</option>
+                <option>Workshop</option>
+                <option>Collaboration</option>
+                <option>Other</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" placeholder="Tell me about your idea..." required></textarea>
+            </div>
+
+            <button class="btn btn-primary" type="submit"><i class="fa-solid fa-paper-plane"></i> Send Message</button>
+            <p id="formMessage" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========================= FOOTER ========================= -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>
+        <strong>[Graduate Name]</strong>
+        <p>[Graduation Year] · Creating art with passion, vision, and purpose.</p>
+      </div>
+
+      <div class="socials" aria-label="Footer social links">
+        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#" aria-label="Behance"><i class="fa-brands fa-behance"></i></a>
+        <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <button class="icon-btn back-to-top" id="backToTop" aria-label="Back to top">
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
+
+  <!-- ========================= ARTWORK MODAL ========================= -->
+  <div class="modal" id="artModal" aria-hidden="true">
+    <div class="modal-card">
+      <button class="close-modal" id="closeModal" aria-label="Close artwork view">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="modal-img">
+        <img id="modalImage" src="" alt="Selected artwork">
+      </div>
+
+      <div class="modal-content">
+        <p class="eyebrow">Artwork Details</p>
+        <h2 id="modalTitle">Artwork Title</h2>
+        <div class="art-details">
+          <div><span>Year</span><strong id="modalYear">2026</strong></div>
+          <div><span>Technique</span><strong id="modalTechnique">Acrylic</strong></div>
+          <div><span>Size</span><strong id="modalSize">70 × 100 cm</strong></div>
+        </div>
+        <p id="modalDescription">Artwork description appears here.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* =========================================================
+       JavaScript: menu, dark mode, portfolio filters, modal,
+       contact form demo, scroll reveal, back-to-top
+       ========================================================= */
+
+    const body = document.body;
+    const themeToggle = document.getElementById("themeToggle");
+    const menuBtn = document.getElementById("menuBtn");
+    const navLinks = document.getElementById("navLinks");
+    const backToTop = document.getElementById("backToTop");
+
+    // Dark Mode
+    const savedTheme = localStorage.getItem("artist-theme");
+    if (savedTheme === "dark") {
+      body.classList.add("dark");
+      themeToggle.innerHTML = '<i class="fa-solid fa-sun"></i>';
+    }
+
+    themeToggle.addEventListener("click", () => {
+      body.classList.toggle("dark");
+      const isDark = body.classList.contains("dark");
+      localStorage.setItem("artist-theme", isDark ? "dark" : "light");
+      themeToggle.innerHTML = isDark
+        ? '<i class="fa-solid fa-sun"></i>'
+        : '<i class="fa-solid fa-moon"></i>';
+    });
+
+    // Mobile Menu
+    menuBtn.addEventListener("click", () => {
+      navLinks.classList.toggle("open");
+      menuBtn.innerHTML = navLinks.classList.contains("open")
+        ? '<i class="fa-solid fa-xmark"></i>'
+        : '<i class="fa-solid fa-bars"></i>';
+    });
+
+    navLinks.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        menuBtn.innerHTML = '<i class="fa-solid fa-bars"></i>';
+      });
+    });
+
+    // Scroll Reveal
+    const revealItems = document.querySelectorAll("[data-reveal]");
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("revealed");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    revealItems.forEach(item => revealObserver.observe(item));
+
+    // Portfolio Filters
+    const filterButtons = document.querySelectorAll(".filter-btn");
+    const artworks = document.querySelectorAll(".artwork");
+
+    filterButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        filterButtons.forEach(btn => btn.classList.remove("active"));
+        button.classList.add("active");
+
+        const filter = button.dataset.filter;
+
+        artworks.forEach(art => {
+          const isMatch = filter === "all" || art.dataset.category === filter;
+          art.classList.toggle("hidden", !isMatch);
+        });
+      });
+    });
+
+    // Artwork Modal
+    const artModal = document.getElementById("artModal");
+    const closeModal = document.getElementById("closeModal");
+    const modalImage = document.getElementById("modalImage");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalYear = document.getElementById("modalYear");
+    const modalTechnique = document.getElementById("modalTechnique");
+    const modalSize = document.getElementById("modalSize");
+    const modalDescription = document.getElementById("modalDescription");
+
+    artworks.forEach(art => {
+      art.addEventListener("click", () => {
+        modalImage.src = art.dataset.image;
+        modalImage.alt = art.dataset.title;
+        modalTitle.textContent = art.dataset.title;
+        modalYear.textContent = art.dataset.year;
+        modalTechnique.textContent = art.dataset.technique;
+        modalSize.textContent = art.dataset.size;
+        modalDescription.textContent = art.dataset.description;
+        artModal.classList.add("open");
+        artModal.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+      });
+    });
+
+    function closeArtworkModal() {
+      artModal.classList.remove("open");
+      artModal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    }
+
+    closeModal.addEventListener("click", closeArtworkModal);
+
+    artModal.addEventListener("click", (event) => {
+      if (event.target === artModal) closeArtworkModal();
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && artModal.classList.contains("open")) {
+        closeArtworkModal();
+      }
+    });
+
+    // Contact Form Demo
+    const contactForm = document.getElementById("contactForm");
+    const formMessage = document.getElementById("formMessage");
+
+    contactForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      formMessage.textContent = "Thank you! Your message is ready to be connected to an email service or backend.";
+      formMessage.style.color = "var(--gold)";
+      contactForm.reset();
+    });
+
+    // Back To Top
+    window.addEventListener("scroll", () => {
+      backToTop.classList.toggle("show", window.scrollY > 700);
+    });
+
+    backToTop.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  </script>
+</body>
+</html>
